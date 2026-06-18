@@ -4,21 +4,21 @@ Browser-side JavaScript implementation equivalent to the attached Python convert
 
 ## Files
 
-- `webarchive-mhtml-browser.js` — ES module library.
-- `webarchive-mhtml-demo.html` — small browser UI.
+- `webarchive-mhtml-browser.js` - ES module library.
+- `index.html` - small browser UI.
 
 ## Run locally
 
 Because the demo uses ES modules, serve it over HTTP instead of opening it with `file://`:
 
 ```sh
-python3 -m http.server 8000
+python3 -m http.server 8000 --directory public
 ```
 
 Then open:
 
 ```text
-http://localhost:8000/webarchive-mhtml-demo.html
+http://localhost:8000/index.html
 ```
 
 ## Dependency

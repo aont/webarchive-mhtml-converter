@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ja">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -15,27 +15,27 @@
 <body>
   <h1>WebArchive / MHTML Browser Converter</h1>
 
-  <p>ブラウザ内で <code>.mhtml/.mht → .webarchive</code> と <code>.webarchive → .mhtml</code> を変換します。ファイルはサーバへ送信しません。</p>
+  <p>Convert <code>.mhtml/.mht to .webarchive</code> and <code>.webarchive to .mhtml</code> in your browser. Files are not sent to a server.</p>
 
   <label>
-    入力ファイル
+    Input file
     <input id="file" type="file" accept=".webarchive,.mhtml,.mht" />
   </label>
 
   <label>
-    変換先
+    Conversion target
     <select id="target">
-      <option value="auto">自動判定</option>
-      <option value="webarchive">MHTML → WebArchive</option>
-      <option value="mhtml">WebArchive → MHTML</option>
+      <option value="auto">Auto-detect</option>
+      <option value="webarchive">MHTML to WebArchive</option>
+      <option value="mhtml">WebArchive to MHTML</option>
     </select>
   </label>
 
   <fieldset>
-    <legend>MHTML → WebArchive</legend>
-    <label><input id="inlineCidCss" type="checkbox" checked /> cid: CSS link を style タグへインライン化する</label>
+    <legend>MHTML to WebArchive</legend>
+    <label><input id="inlineCidCss" type="checkbox" checked /> Inline cid: CSS links into style tags</label>
     <label>
-      plist 出力形式
+      plist output format
       <select id="plistFormat">
         <option value="binary">binary</option>
         <option value="xml">xml</option>
@@ -44,13 +44,13 @@
   </fieldset>
 
   <fieldset>
-    <legend>WebArchive → MHTML</legend>
-    <label><input id="includeSubframes" type="checkbox" checked /> WebSubframeArchives を含める</label>
+    <legend>WebArchive to MHTML</legend>
+    <label><input id="includeSubframes" type="checkbox" checked /> Include WebSubframeArchives</label>
   </fieldset>
 
-  <button id="convert">変換</button>
+  <button id="convert">Convert</button>
 
-  <h2>結果</h2>
+  <h2>Result</h2>
   <div id="result"></div>
   <pre id="log"></pre>
 
@@ -67,7 +67,7 @@
 
       const file = fileInput.files?.[0];
       if (!file) {
-        log.textContent = '入力ファイルを選択してください。';
+        log.textContent = 'Please choose an input file.';
         return;
       }
 
@@ -83,11 +83,11 @@
         const a = document.createElement('a');
         a.href = url;
         a.download = converted.filename;
-        a.textContent = `${converted.filename} をダウンロード`;
+        a.textContent = `Download ${converted.filename}`;
         result.appendChild(a);
 
         const btn = document.createElement('button');
-        btn.textContent = '即時ダウンロード';
+        btn.textContent = 'Download now';
         btn.style.marginLeft = '1rem';
         btn.addEventListener('click', () => downloadBlob(converted.blob, converted.filename));
         result.appendChild(btn);
@@ -95,7 +95,7 @@
         const subresources = Array.isArray(converted.archive.WebSubresources)
           ? converted.archive.WebSubresources.length
           : 0;
-        log.textContent = `変換完了\n出力: ${converted.filename}\nサイズ: ${converted.blob.size.toLocaleString()} bytes\nSubresources: ${subresources}`;
+        log.textContent = `Conversion complete\nOutput: ${converted.filename}\nSize: ${converted.blob.size.toLocaleString()} bytes\nSubresources: ${subresources}`;
       } catch (err) {
         console.error(err);
         log.textContent = `error: ${err?.message || err}`;
