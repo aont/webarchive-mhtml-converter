@@ -1,6 +1,6 @@
 # WebArchive / MHTML Browser Converter
 
-Browser-side JavaScript implementation equivalent to the attached Python converter.
+Browser-side JavaScript implementation.
 
 ## Files
 
